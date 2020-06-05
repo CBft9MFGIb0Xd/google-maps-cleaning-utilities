@@ -20,7 +20,7 @@ var pleaseDeleteContributionsPlease = function () {
     }
         
     var deleteContribution = function() {
-        [...document.querySelectorAll('div[role="menuitem"][class="action-menu-entry"] > div[class="action-menu-entry-text"]')].forEach( (a) => { 
+        [...document.querySelectorAll('div[class="action-menu-entry-text"]')].forEach( (a) => { 
             if (a.innerHTML.includes("Delete")
                 || a.innerHTML.includes("Elimina")) {
                 a.parentElement.style.border = "thick solid red";
@@ -31,7 +31,8 @@ var pleaseDeleteContributionsPlease = function () {
     }
 
     var removeMe = function() {
-        
+        var currentIndex = 0; 
+        var items = [...document.querySelectorAll('button[class*="action-menu"]')];
         var elem = items[currentIndex];
         if (currentIndex < numberOfItems && elem) {
             
