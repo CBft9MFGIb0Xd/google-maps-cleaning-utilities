@@ -16,7 +16,7 @@ var pleaseDeleteContributionsPlease = function () {
             a.style.border = "thick solid red";
             a.click(); 
         });
-        setTimeout(removeMe, 5000);
+        setTimeout(scrollToBottom, 5000);
     }
         
     var deleteContribution = function() {
@@ -31,17 +31,17 @@ var pleaseDeleteContributionsPlease = function () {
     }
 
     var removeMe = function() {
-        var currentIndex = 0; 
         var items = [...document.querySelectorAll('button[class*="action-menu"]')];
-        var elem = items[currentIndex];
-        if (currentIndex < numberOfItems && elem) {
+        var elem = items[0];
+        var numberOfItems = [...document.querySelectorAll('button[class*="action-menu"]')].length;
+        if (currentTaskNum < numberOfItems && elem) {
             
             elem.style.border = "thick solid red"; 
             elem.click();
 
             // goes to the next item
-            currentIndex = currentIndex + 1;
-            console.log('task:', currentIndex, 'of', numberOfItems);
+            currentTaskNum = currentTaskNum + 1;
+            console.log('task:', currentTaskNum, 'of', numberOfItems);
             // set to delete the item
             setTimeout(deleteContribution, 600);
         
@@ -51,10 +51,14 @@ var pleaseDeleteContributionsPlease = function () {
         }  
     };
 
+    var scrollToBottom = function() {
+        document.querySelector("#pane > div > div.widget-pane-content.scrollable-y > div > div > div.section-layout.section-scrollbox.scrollable-y.scrollable-show").scroll(0, 10000000000);
+        
+        // start iterating through `items`
+        setTimeout(removeMe, 5000);
+    };
+
     // these are used inside the above functions
-    var currentIndex = 0; 
-    var items = [...document.querySelectorAll('button[class*="action-menu"]')];
-    var numberOfItems = [...document.querySelectorAll('button[class*="action-menu"]')].length;
-    // start iterating through `items`
-    removeMe();
+    var currentTaskNum = 0; 
+    scrollToBottom();
 }
